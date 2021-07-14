@@ -5,8 +5,8 @@ class Posts {
   final title;
   final slug;
   final description;
-  final postCategoryId;
-  final userId;
+  final postCategory;
+  final author;
   final tag;
   final image;
   final status;
@@ -18,8 +18,8 @@ class Posts {
       this.title,
       this.slug,
       this.description,
-      this.postCategoryId,
-      this.userId,
+      this.postCategory,
+      this.author,
       this.tag,
       this.image,
       this.status,
@@ -28,17 +28,17 @@ class Posts {
 
   factory Posts.fromJson(Map<String, dynamic> map) {
     return Posts(
-        id: map["data"]["id"],
-        title: map["data"]["title"],
-        slug: map["data"]["slug"],
-        description: map["data"]["description"],
-        postCategoryId: map["data"]["postCategoryId"],
-        userId: map["data"]["userId"],
-        tag: map["data"]["tag"],
-        image: map["data"]["image"],
-        status: map["data"]["status"],
-        createdAt: map["data"]["createdAt"],
-        updatedAt: map["data"]["updatedAt"]);
+        id: map["id"].toString(),
+        title: map["title"].toString(),
+        slug: map["slug"].toString(),
+        description: map["description"].toString(),
+        postCategory: map["post_category"].toString(),
+        author: map["author"].toString(),
+        tag: map["tag"].toString(),
+        image: map["image"].toString(),
+        status: map["status"].toString(),
+        createdAt: map["created_at"].toString(),
+        updatedAt: map["updated_at"].toString());
   }
 
   Map<String, dynamic> toJson() {
@@ -47,28 +47,28 @@ class Posts {
       "title": title,
       "slug": slug,
       "description": description,
-      "postCategoryId": postCategoryId,
-      "userId": userId,
+      "post_category": postCategory,
+      "author": author,
       "tag": tag,
       "image": image,
       "status": status,
-      "createdAt": createdAt,
-      "updatedAt": updatedAt
+      "created_at": createdAt,
+      "updated_at": updatedAt
     };
   }
 
-  @override
-  String toString() {
-    return 'Posts{id: $id, title: $title, slug: $slug, description: $description, postCategoryId: $postCategoryId, userId: $userId, tag: $tag, image: $image, status: $status, createdAt: $createdAt, updatedAt: $updatedAt}';
-  }
+  // @override
+  // String toString() {
+  //   return 'Posts{id: $id, title: $title, slug: $slug, description: $description, postCategoryId: $postCategoryId, userId: $userId, tag: $tag, image: $image, status: $status, createdAt: $createdAt, updatedAt: $updatedAt}';
+  // }
 }
 
 List<Posts> postFromJson(String jsonData) {
   final data = json.decode(jsonData);
-  return List<Posts>.from(data.map((item) => Posts.fromJson(item)));
+  return List<Posts>.from(data['data'].map((item) => Posts.fromJson(item)));
 }
 
-String postToJson(Posts data) {
-  final jsonData = data.toJson();
-  return json.encode(jsonData);
-}
+// String postToJson(Posts data) {
+//   final jsonData = data.toJson();
+//   return json.encode(jsonData);
+// }

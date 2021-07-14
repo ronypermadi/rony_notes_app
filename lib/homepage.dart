@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rony_notes_app/network_image.dart';
+import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/models/posts.dart';
 import 'package:rony_notes_app/services/api_services.dart';
 
@@ -51,18 +51,19 @@ class _HomepageState extends State<Homepage> {
                         child: Text(
                             "Something wrong with message: ${snapshot.error.toString()}"),
                       );
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.done) {
-                      List<Posts>? postList = snapshot.data;
+                    } else if (snapshot.hasData) {
+                      List<Posts> postList = snapshot.data!;
                       // return ListView.builder(
                       //     itemCount: postList.length,
                       //     itemBuilder: (BuildContext context, int index) {
                       //       return buildList(context, index);
                       //     });
-                      return _buildListView(postList!);
+                      return _buildListView(postList);
                     } else {
                       return Center(
-                        child: Container(),
+                        child: Container(
+                          child: Text("Failed to load a post"),
+                        ),
                       );
                     }
                   },
@@ -194,7 +195,7 @@ class _HomepageState extends State<Homepage> {
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: postList[index].postCategoryId,
+                                      text: postList[index].postCategory,
                                       style: TextStyle(fontSize: 10.0)),
                                   WidgetSpan(
                                     child: const SizedBox(width: 30.0),
