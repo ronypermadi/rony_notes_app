@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/models/posts.dart';
 import 'package:rony_notes_app/services/api_services.dart';
+import 'package:rony_notes_app/widgets/network_image.dart';
+import 'package:rony_notes_app/widgets/navdrawer.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -10,14 +11,6 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   final ApiServices api = ApiServices();
-  // ApiServices api;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   api = ApiServices();
-  // }
-
   final imagePath = "https://notes.ronypermadi.com/storage/posts/";
 
   final TextStyle dropdownMenuItem =
@@ -32,6 +25,7 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff0f0f0),
+      drawer: NavDrawer(),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -62,7 +56,7 @@ class _HomepageState extends State<Homepage> {
                     } else {
                       return Center(
                         child: Container(
-                          child: Text("Failed to load a post"),
+                          child: Text("Data not found"),
                         ),
                       );
                     }
