@@ -3,6 +3,7 @@ import 'package:rony_notes_app/models/posts.dart';
 import 'package:rony_notes_app/services/api_services.dart';
 import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/widgets/navdrawer.dart';
+import 'package:rony_notes_app/widgets/search_form.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -12,9 +13,6 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   final ApiServices api = ApiServices();
   final imagePath = "https://notes.ronypermadi.com/storage/posts/";
-
-  final TextStyle dropdownMenuItem =
-      TextStyle(color: Colors.black, fontSize: 18);
 
   final primary = Color(0xff212121);
   final secondary = Color(0xffb71c1c);
@@ -76,13 +74,6 @@ class _HomepageState extends State<Homepage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      // IconButton(
-                      //   onPressed: () {},
-                      //   icon: Icon(
-                      //     Icons.menu,
-                      //     color: Colors.white,
-                      //   ),
-                      // ),
                       Center(
                         child: NetworkImageCache(
                           logoHeader,
@@ -93,40 +84,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
               ),
-              Container(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 110,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Material(
-                        elevation: 5.0,
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                        child: TextField(
-                          // controller: TextEditingController(text: locations[0]),
-                          cursorColor: Theme.of(context).primaryColor,
-                          style: dropdownMenuItem,
-                          decoration: InputDecoration(
-                              hintText: "Search",
-                              hintStyle: TextStyle(
-                                  color: Colors.black38, fontSize: 16),
-                              prefixIcon: Material(
-                                elevation: 0.0,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30)),
-                                child: Icon(Icons.search),
-                              ),
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 25, vertical: 13)),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
+              SearchForm()
             ],
           ),
         ),
@@ -164,9 +122,10 @@ class _HomepageState extends State<Homepage> {
                   child: Row(
                     children: <Widget>[
                       Container(
-                        height: 120,
+                        // height: 120,
                         // color: Colors.blue,
-                        width: 120,
+                        width: MediaQuery.of(context).size.width * 0.30,
+                        height: MediaQuery.of(context).size.height,
                         child: NetworkImageCache(
                           imagePath + postList[index].image,
                           fit: BoxFit.cover,
@@ -192,11 +151,11 @@ class _HomepageState extends State<Homepage> {
                                       text: postList[index].postCategory,
                                       style: TextStyle(fontSize: 10.0)),
                                   WidgetSpan(
-                                    child: const SizedBox(width: 30.0),
+                                    child: SizedBox(width: 10),
                                   ),
-                                  WidgetSpan(
-                                    child: const SizedBox(width: 10.0),
-                                  ),
+                                  // WidgetSpan(
+                                  //   child: const SizedBox(width: 10.0),
+                                  // ),
                                   TextSpan(
                                       text: postList[index].createdAt,
                                       style: TextStyle(fontSize: 10.0)),
@@ -215,82 +174,4 @@ class _HomepageState extends State<Homepage> {
           );
         });
   }
-
-  // Widget buildList(BuildContext context, int index) {
-  //   return Container(
-  //     decoration: BoxDecoration(
-  //       borderRadius: BorderRadius.circular(20),
-  //       color: Colors.white,
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: Colors.grey.withOpacity(0.5),
-  //           spreadRadius: 5,
-  //           blurRadius: 7,
-  //           offset: Offset(0, 3), // changes position of shadow
-  //         ),
-  //       ],
-  //     ),
-  //     width: double.infinity,
-  //     height: 120,
-  //     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-  //     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-  //     child: Stack(
-  //       children: <Widget>[
-  //         Container(
-  //           color: Colors.white,
-  //           margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-  //           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-  //           child: Row(
-  //             children: <Widget>[
-  //               Container(
-  //                 height: 120,
-  //                 // color: Colors.blue,
-  //                 width: 120,
-  //                 child: NetworkImageCache(
-  //                   imagePath + postList[index].image,
-  //                   fit: BoxFit.cover,
-  //                 ),
-  //               ),
-  //               const SizedBox(width: 20.0),
-  //               Expanded(
-  //                 child: Column(
-  //                   children: <Widget>[
-  //                     Text(
-  //                       postList[index].title,
-  //                       textAlign: TextAlign.left,
-  //                       style: TextStyle(
-  //                         color: secondary,
-  //                         fontWeight: FontWeight.bold,
-  //                         fontSize: 16.0,
-  //                       ),
-  //                     ),
-  //                     Text.rich(
-  //                       TextSpan(
-  //                         children: [
-  //                           TextSpan(
-  //                               text: postList[index].postCategoryId,
-  //                               style: TextStyle(fontSize: 10.0)),
-  //                           WidgetSpan(
-  //                             child: const SizedBox(width: 30.0),
-  //                           ),
-  //                           WidgetSpan(
-  //                             child: const SizedBox(width: 10.0),
-  //                           ),
-  //                           TextSpan(
-  //                               text: postList[index].createdAt,
-  //                               style: TextStyle(fontSize: 10.0)),
-  //                         ],
-  //                       ),
-  //                       style: TextStyle(height: 2.0),
-  //                     ),
-  //                   ],
-  //                 ),
-  //               )
-  //             ],
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
 }
