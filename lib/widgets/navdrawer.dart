@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:rony_notes_app/widgets/network_image.dart';
 
@@ -22,14 +23,39 @@ class NavDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.refresh),
-            title: Text('Refresh'),
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: Icon(Icons.tag),
+            title: Text('Category'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Exit'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              showDialog(
+                  context: context,
+                  builder: (_) {
+                    return AlertDialog(
+                      title: Text('Are you sure?'),
+                      content: Text('Do you want to exit the App'),
+                      actions: [
+                        TextButton(
+                          onPressed: () =>
+                              Navigator.pop(context, false), // passing false
+                          child: Text('No'),
+                        ),
+                        TextButton(
+                          onPressed: () => exit(0), // passing true
+                          child: Text('Yes'),
+                        ),
+                      ],
+                    );
+                  })
+            },
           ),
         ],
       ),

@@ -56,8 +56,8 @@ class _HomepageState extends State<Homepage> {
                     } else {
                       return Center(
                         child: Container(
-                          child: Text("Data not found"),
-                        ),
+                            // child: Text("Data not found"),
+                            ),
                       );
                     }
                   },
