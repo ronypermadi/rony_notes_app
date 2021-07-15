@@ -6,12 +6,12 @@ import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/widgets/navdrawer.dart';
 import 'package:rony_notes_app/widgets/search_form.dart';
 
-class Homepage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _HomepageState createState() => _HomepageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _HomePageState extends State<HomePage> {
   final ApiServices api = ApiServices();
   final imagePath = "https://notes.ronypermadi.com/storage/posts/";
   final primary = Color(0xff212121);

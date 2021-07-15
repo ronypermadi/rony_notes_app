@@ -18,7 +18,8 @@ class ApiServices {
     var url = Uri.parse('https://ronypermadi.com/api/post/$slug');
     http.Response response = await http.get(url);
     if (response.statusCode == 200) {
-      return Posts.fromJson(json.decode(response.body));
+      final data = json.decode(response.body);
+      return Posts.fromJson(data['data']);
     } else {
       return throw Exception('Failed to load a post');
     }

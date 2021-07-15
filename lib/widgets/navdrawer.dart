@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:rony_notes_app/pages/homepage.dart';
 import 'package:rony_notes_app/widgets/network_image.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -25,7 +26,12 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.home),
             title: Text('Home'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => HomePage()))
+            },
           ),
           ListTile(
             leading: Icon(Icons.tag),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:share/share.dart';
 import 'package:rony_notes_app/models/posts.dart';
 import 'package:rony_notes_app/widgets/network_image.dart';
+import 'package:rony_notes_app/widgets/navdrawer.dart';
 import 'package:rony_notes_app/services/api_services.dart';
 
 class SinglePost extends StatefulWidget {
@@ -20,19 +22,35 @@ class _SinglePostState extends State<SinglePost> {
   final secondary = Color(0xffb71c1c);
   final logoHeader =
       'https://notes.ronypermadi.com/assets/front/images/core-img/Logo.png';
+  String urlPath = 'https://notes.ronypermadi.com/post';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: NavDrawer(),
         appBar: AppBar(
-            backgroundColor: primary,
-            centerTitle: true,
-            title: NetworkImageCache(
-              logoHeader,
-              fit: BoxFit.cover,
-            )
-            // title: Text('Detail Post'),
-            ),
+          automaticallyImplyLeading: false,
+          backgroundColor: primary,
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => {
+              Navigator.pop(context),
+            },
+          ),
+          title: NetworkImageCache(
+            logoHeader,
+            fit: BoxFit.cover,
+          ),
+          actions: [
+            IconButton(
+                icon: Icon(Icons.refresh),
+                onPressed: () {
+                  setState(() {});
+                }),
+          ],
+          // title: Text('Detail Post'),
+        ),
         body: FutureBuilder<Posts>(
           future: api.getSinglePost(widget.slug),
           builder: (context, snapshot) {
@@ -90,19 +108,36 @@ class _SinglePostState extends State<SinglePost> {
                           ),
                           Divider(),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Icon(
-                                Icons.timer,
-                                color: primary,
-                                size: 10,
-                              ),
-                              Expanded(
-                                child: Text(snapshot.data!.createdAt),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.calendar_today,
+                                    color: primary,
+                                    size: 12,
+                                  ),
+                                  SizedBox(width: 3.0),
+                                  Text(snapshot.data!.createdAt,
+                                      style: TextStyle(fontSize: 14)),
+                                  SizedBox(width: 10.0),
+                                  Icon(
+                                    Icons.account_box,
+                                    color: primary,
+                                    size: 12,
+                                  ),
+                                  SizedBox(width: 3.0),
+                                  Text(snapshot.data!.author,
+                                      style: TextStyle(fontSize: 14)),
+                                ],
                               ),
                               IconButton(
-                                icon: Icon(Icons.share, size: 10),
-                                onPressed: () {},
-                              )
+                                alignment: Alignment.centerRight,
+                                icon: Icon(Icons.share),
+                                onPressed: () {
+                                  Share.share(urlPath + snapshot.data!.slug);
+                                },
+                              ),
                             ],
                           ),
                           Divider(),
@@ -110,10 +145,21 @@ class _SinglePostState extends State<SinglePost> {
                             height: 5.0,
                           ),
                           Html(data: snapshot.data!.description),
-                          // Text(
-                          //   snapshot.data!.description,
-                          //   textAlign: TextAlign.justify,
-                          // )
+                          Divider(),
+                          Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.tag,
+                                size: 13,
+                              ),
+                              SizedBox(width: 5.0),
+                              Text(
+                                snapshot.data!.tag,
+                                style: TextStyle(fontSize: 13),
+                              )
+                            ],
+                          ),
+                          Divider(),
                         ],
                       ),
                     ),

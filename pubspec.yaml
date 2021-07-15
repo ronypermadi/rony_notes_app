@@ -28,6 +28,7 @@ dependencies:
   flutter_html: ^2.1.0
   flutter_launcher_icons: ^0.9.0
   http: ^0.13.3
+  share: any
 
 dev_dependencies:
   flutter_test:
