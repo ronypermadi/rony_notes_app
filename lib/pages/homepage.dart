@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rony_notes_app/models/posts.dart';
+import 'package:rony_notes_app/pages/single_post.dart';
 import 'package:rony_notes_app/services/api_services.dart';
 import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/widgets/navdrawer.dart';
@@ -13,7 +14,6 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   final ApiServices api = ApiServices();
   final imagePath = "https://notes.ronypermadi.com/storage/posts/";
-
   final primary = Color(0xff212121);
   final secondary = Color(0xffb71c1c);
   final logoHeader =
@@ -41,15 +41,10 @@ class _HomepageState extends State<Homepage> {
                     if (snapshot.hasError) {
                       return Center(
                         child: Text(
-                            "Something wrong with message: ${snapshot.error.toString()}"),
+                            "Something wrong with error message: ${snapshot.error.toString()}"),
                       );
                     } else if (snapshot.hasData) {
                       List<Posts> postList = snapshot.data!;
-                      // return ListView.builder(
-                      //     itemCount: postList.length,
-                      //     itemBuilder: (BuildContext context, int index) {
-                      //       return buildList(context, index);
-                      //     });
                       return _buildListView(postList);
                     } else {
                       return Center(
@@ -115,58 +110,63 @@ class _HomepageState extends State<Homepage> {
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Stack(
               children: <Widget>[
-                Container(
-                  color: Colors.white,
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        // height: 120,
-                        // color: Colors.blue,
-                        width: MediaQuery.of(context).size.width * 0.30,
-                        height: MediaQuery.of(context).size.height,
-                        child: NetworkImageCache(
-                          imagePath + postList[index].image,
-                          fit: BoxFit.cover,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => SinglePost(
+                                slug: postList[index].slug,
+                                key: ValueKey(postList[index].slug))));
+                  },
+                  child: Container(
+                    color: Colors.white,
+                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.30,
+                          height: MediaQuery.of(context).size.height,
+                          child: NetworkImageCache(
+                            imagePath + postList[index].image,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 20.0),
-                      Expanded(
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              postList[index].title,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: secondary,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
+                        const SizedBox(width: 20.0),
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                postList[index].title,
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  color: secondary,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.0,
+                                ),
                               ),
-                            ),
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: postList[index].postCategory,
-                                      style: TextStyle(fontSize: 10.0)),
-                                  WidgetSpan(
-                                    child: SizedBox(width: 10),
-                                  ),
-                                  // WidgetSpan(
-                                  //   child: const SizedBox(width: 10.0),
-                                  // ),
-                                  TextSpan(
-                                      text: postList[index].createdAt,
-                                      style: TextStyle(fontSize: 10.0)),
-                                ],
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                        text: postList[index].postCategory,
+                                        style: TextStyle(fontSize: 10.0)),
+                                    WidgetSpan(
+                                      child: SizedBox(width: 5.0),
+                                    ),
+                                    TextSpan(
+                                        text: postList[index].createdAt,
+                                        style: TextStyle(fontSize: 10.0)),
+                                  ],
+                                ),
+                                style: TextStyle(height: 2.0),
                               ),
-                              style: TextStyle(height: 2.0),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],

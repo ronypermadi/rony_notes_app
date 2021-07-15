@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:rony_notes_app/models/posts.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,6 +9,16 @@ class ApiServices {
     http.Response response = await http.get(url);
     if (response.statusCode == 200) {
       return postFromJson(response.body);
+    } else {
+      return throw Exception('Failed to load a post');
+    }
+  }
+
+  Future<Posts> getSinglePost(String slug) async {
+    var url = Uri.parse('https://ronypermadi.com/api/post/$slug');
+    http.Response response = await http.get(url);
+    if (response.statusCode == 200) {
+      return Posts.fromJson(json.decode(response.body));
     } else {
       return throw Exception('Failed to load a post');
     }

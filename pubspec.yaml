@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   cached_network_image: ^3.0.0
   cupertino_icons: ^1.0.2
+  flutter_html: ^2.1.0
   flutter_launcher_icons: ^0.9.0
   http: ^0.13.3
 
@@ -70,6 +71,6 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_icons:
-    image_path: "assets/icon/favicon.png" 
-    android: true
-    ios: true
+  image_path: "assets/icon/favicon.png"
+  android: true
+  ios: true
