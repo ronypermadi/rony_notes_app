@@ -11,7 +11,7 @@ class ApiServices {
     if (response.statusCode == 200) {
       return postFromJson(response.body);
     } else {
-      return throw Exception('Failed to load a post');
+      return throw Exception('Failed to load all post');
     }
   }
 
@@ -22,7 +22,7 @@ class ApiServices {
       final data = json.decode(response.body);
       return Posts.fromJson(data['data']);
     } else {
-      return throw Exception('Failed to load a post');
+      return throw Exception('Failed to load single post');
     }
   }
 
@@ -32,7 +32,17 @@ class ApiServices {
     if (response.statusCode == 200) {
       return postFromJson(response.body);
     } else {
-      return throw Exception('Failed to load a post');
+      return throw Exception('Failed to load post by category');
+    }
+  }
+
+  Future<List<Posts>> getSearchPost(String search) async {
+    var url = Uri.parse('https://ronypermadi.com/api/search/$search');
+    http.Response response = await http.get(url);
+    if (response.statusCode == 200) {
+      return postFromJson(response.body);
+    } else {
+      return throw Exception('Failed to load search post');
     }
   }
 
@@ -42,7 +52,7 @@ class ApiServices {
     if (response.statusCode == 200) {
       return categoryFromJson(response.body);
     } else {
-      return throw Exception('Failed to load a category');
+      return throw Exception('Failed to load category');
     }
   }
 }
