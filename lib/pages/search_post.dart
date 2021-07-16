@@ -52,8 +52,8 @@ class _SearchPostState extends State<SearchPost> {
                     } else {
                       return Center(
                         child: Container(
-                          child: Text("No Post Available"),
-                        ),
+                            // child: Text("No Post Available"),
+                            ),
                       );
                     }
                   },

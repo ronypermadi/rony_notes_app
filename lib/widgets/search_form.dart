@@ -33,7 +33,7 @@ class SearchForm extends StatelessWidget {
                 cursorColor: Theme.of(context).primaryColor,
                 // style: dropdownMenuItem,
                 decoration: InputDecoration(
-                    hintText: "Search Post",
+                    hintText: "Search",
                     hintStyle: TextStyle(color: Colors.black38, fontSize: 16),
                     border: InputBorder.none,
                     prefixIcon: Material(

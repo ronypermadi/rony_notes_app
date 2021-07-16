@@ -169,7 +169,7 @@ class _SinglePostState extends State<SinglePost> {
             } else {
               return Center(
                 child: Container(
-                    // child: Text("Data not found"),
+                    // child: Text("No Post Available"),
                     ),
               );
             }
