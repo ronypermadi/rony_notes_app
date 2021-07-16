@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:rony_notes_app/pages/homepage.dart';
+import 'package:rony_notes_app/pages/category_page.dart';
 import 'package:rony_notes_app/widgets/network_image.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -36,7 +37,12 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.tag),
             title: Text('Category'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => CategoryPage()))
+            },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),

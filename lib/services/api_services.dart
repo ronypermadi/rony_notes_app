@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:rony_notes_app/models/posts.dart';
+import 'package:rony_notes_app/models/category.dart';
 import 'package:http/http.dart' as http;
 
 class ApiServices {
@@ -22,6 +23,26 @@ class ApiServices {
       return Posts.fromJson(data['data']);
     } else {
       return throw Exception('Failed to load a post');
+    }
+  }
+
+  Future<List<Posts>> getPostCategory(String name) async {
+    var url = Uri.parse('https://ronypermadi.com/api/category/$name');
+    http.Response response = await http.get(url);
+    if (response.statusCode == 200) {
+      return postFromJson(response.body);
+    } else {
+      return throw Exception('Failed to load a post');
+    }
+  }
+
+  Future<List<Category>> getCategory() async {
+    var url = Uri.parse('https://ronypermadi.com/api/category');
+    http.Response response = await http.get(url);
+    if (response.statusCode == 200) {
+      return categoryFromJson(response.body);
+    } else {
+      return throw Exception('Failed to load a category');
     }
   }
 }
