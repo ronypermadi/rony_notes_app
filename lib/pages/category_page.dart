@@ -6,12 +6,9 @@ import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/widgets/navdrawer.dart';
 import 'package:rony_notes_app/widgets/search_form.dart';
 
-class CategoryPage extends StatefulWidget {
-  @override
-  _CategoryPageState createState() => _CategoryPageState();
-}
+class CategoryPage extends StatelessWidget {
+  CategoryPage({Key? key}) : super(key: key);
 
-class _CategoryPageState extends State<CategoryPage> {
   final ApiServices api = ApiServices();
   final primary = Color(0xff212121);
   final secondary = Color(0xffb71c1c);
