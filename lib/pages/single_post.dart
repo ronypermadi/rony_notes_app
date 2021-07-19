@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:share/share.dart';
+import 'package:rony_notes_app/widgets/like_button.dart';
 import 'package:rony_notes_app/models/posts.dart';
 import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/widgets/navdrawer.dart';
@@ -69,6 +70,7 @@ class SinglePost extends StatelessWidget {
                               imagePath + snapshot.data!.image,
                               fit: BoxFit.cover,
                             )),
+                        LikeButton(),
                         Positioned(
                           bottom: 20.0,
                           left: 20.0,
