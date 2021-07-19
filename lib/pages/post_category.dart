@@ -6,15 +6,10 @@ import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/widgets/navdrawer.dart';
 import 'package:rony_notes_app/widgets/search_form.dart';
 
-class PostCategory extends StatefulWidget {
+class PostCategory extends StatelessWidget {
   final String name;
 
   PostCategory({required this.name, Key? key}) : super(key: key);
-  @override
-  _PostCategoryState createState() => _PostCategoryState();
-}
-
-class _PostCategoryState extends State<PostCategory> {
   final ApiServices api = ApiServices();
   final imagePath = "https://notes.ronypermadi.com/storage/posts/";
   final primary = Color(0xff212121);
@@ -38,7 +33,7 @@ class _PostCategoryState extends State<PostCategory> {
                 height: MediaQuery.of(context).size.height,
                 width: double.infinity,
                 child: FutureBuilder(
-                  future: api.getPostCategory(widget.name),
+                  future: api.getPostCategory(name),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<Posts>> snapshot) {
                     if (snapshot.hasError) {
