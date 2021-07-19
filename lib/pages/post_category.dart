@@ -5,6 +5,7 @@ import 'package:rony_notes_app/services/api_services.dart';
 import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/widgets/navdrawer.dart';
 import 'package:rony_notes_app/widgets/search_form.dart';
+import 'package:rony_notes_app/widgets/button_widget.dart';
 
 class PostCategory extends StatelessWidget {
   final String name;
@@ -115,6 +116,7 @@ class PostCategory extends StatelessWidget {
                               imagePath + postList[index].image,
                               fit: BoxFit.cover,
                             ),
+                            BookmarkButton(),
                             Positioned(
                               bottom: 0.0,
                               left: 8.0,

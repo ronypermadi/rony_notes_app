@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:share/share.dart';
-import 'package:rony_notes_app/widgets/like_button.dart';
 import 'package:rony_notes_app/models/posts.dart';
+import 'package:rony_notes_app/services/api_services.dart';
+import 'package:rony_notes_app/widgets/button_widget.dart';
 import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/widgets/navdrawer.dart';
-import 'package:rony_notes_app/services/api_services.dart';
 
 class SinglePost extends StatelessWidget {
   final String slug;
@@ -70,7 +70,7 @@ class SinglePost extends StatelessWidget {
                               imagePath + snapshot.data!.image,
                               fit: BoxFit.cover,
                             )),
-                        LikeButton(),
+                        BookmarkButton(),
                         Positioned(
                           bottom: 20.0,
                           left: 20.0,
@@ -130,12 +130,18 @@ class SinglePost extends StatelessWidget {
                                       style: TextStyle(fontSize: 14)),
                                 ],
                               ),
-                              IconButton(
-                                alignment: Alignment.centerRight,
-                                icon: Icon(Icons.share),
-                                onPressed: () {
-                                  Share.share(urlPath + snapshot.data!.slug);
-                                },
+                              Row(
+                                children: [
+                                  LikeButton(),
+                                  IconButton(
+                                    alignment: Alignment.centerRight,
+                                    icon: Icon(Icons.share_rounded),
+                                    onPressed: () {
+                                      Share.share(
+                                          urlPath + snapshot.data!.slug);
+                                    },
+                                  ),
+                                ],
                               ),
                             ],
                           ),

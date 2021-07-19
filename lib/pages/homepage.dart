@@ -4,7 +4,7 @@ import 'package:rony_notes_app/pages/single_post.dart';
 import 'package:rony_notes_app/services/api_services.dart';
 import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/widgets/navdrawer.dart';
-import 'package:rony_notes_app/widgets/like_button.dart';
+import 'package:rony_notes_app/widgets/button_widget.dart';
 import 'package:rony_notes_app/widgets/search_form.dart';
 
 class HomePage extends StatelessWidget {
@@ -116,7 +116,7 @@ class HomePage extends StatelessWidget {
                               imagePath + postList[index].image,
                               fit: BoxFit.cover,
                             ),
-                            LikeButton(),
+                            BookmarkButton(),
                             Positioned(
                               bottom: 0.0,
                               left: 8.0,
