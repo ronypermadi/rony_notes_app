@@ -6,23 +6,16 @@ import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/widgets/navdrawer.dart';
 import 'package:rony_notes_app/services/api_services.dart';
 
-class SinglePost extends StatefulWidget {
+class SinglePost extends StatelessWidget {
   final String slug;
-
   SinglePost({required this.slug, Key? key}) : super(key: key);
-
-  @override
-  _SinglePostState createState() => _SinglePostState();
-}
-
-class _SinglePostState extends State<SinglePost> {
   final ApiServices api = ApiServices();
   final imagePath = "https://notes.ronypermadi.com/storage/posts/";
   final primary = Color(0xff212121);
   final secondary = Color(0xffb71c1c);
   final logoHeader =
       'https://notes.ronypermadi.com/assets/front/images/core-img/Logo.png';
-  String urlPath = 'https://notes.ronypermadi.com/post';
+  final urlPath = 'https://notes.ronypermadi.com/post/';
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +39,17 @@ class _SinglePostState extends State<SinglePost> {
             IconButton(
                 icon: Icon(Icons.refresh),
                 onPressed: () {
-                  setState(() {});
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              SinglePost(slug: slug, key: ValueKey(slug))));
                 }),
           ],
           // title: Text('Detail Post'),
         ),
         body: FutureBuilder<Posts>(
-          future: api.getSinglePost(widget.slug),
+          future: api.getSinglePost(slug),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(

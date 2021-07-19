@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:rony_notes_app/models/posts.dart';
+import 'package:rony_notes_app/models/comments.dart';
 import 'package:rony_notes_app/models/category.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,6 +13,21 @@ class ApiServices {
       return postFromJson(response.body);
     } else {
       return throw Exception('Failed to load all post');
+    }
+  }
+
+  Future<bool> commentPost(Comments data) async {
+    var url = Uri.parse('https://ronypermadi.com/api/comments/post');
+    http.Response response = await http.post(url, body: {
+      "name": data.name,
+      "email": data.email,
+      "comments": data.comments,
+      "post_id": data.postID
+    });
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 
