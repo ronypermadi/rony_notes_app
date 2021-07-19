@@ -6,15 +6,9 @@ import 'package:rony_notes_app/widgets/network_image.dart';
 import 'package:rony_notes_app/widgets/navdrawer.dart';
 import 'package:rony_notes_app/widgets/search_form.dart';
 
-class SearchPost extends StatefulWidget {
+class SearchPost extends StatelessWidget {
   final String search;
-
   SearchPost({required this.search, Key? key}) : super(key: key);
-  @override
-  _SearchPostState createState() => _SearchPostState();
-}
-
-class _SearchPostState extends State<SearchPost> {
   final ApiServices api = ApiServices();
   final imagePath = "https://notes.ronypermadi.com/storage/posts/";
   final primary = Color(0xff212121);
@@ -38,7 +32,7 @@ class _SearchPostState extends State<SearchPost> {
                 height: MediaQuery.of(context).size.height,
                 width: double.infinity,
                 child: FutureBuilder(
-                  future: api.getSearchPost(widget.search),
+                  future: api.getSearchPost(search),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<Posts>> snapshot) {
                     if (snapshot.hasError) {

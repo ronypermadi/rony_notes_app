@@ -8,7 +8,6 @@ import 'package:rony_notes_app/widgets/search_form.dart';
 
 class PostCategory extends StatelessWidget {
   final String name;
-
   PostCategory({required this.name, Key? key}) : super(key: key);
   final ApiServices api = ApiServices();
   final imagePath = "https://notes.ronypermadi.com/storage/posts/";
